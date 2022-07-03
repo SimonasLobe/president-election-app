@@ -3,12 +3,12 @@ package com.nasdaq.presidentelectionapp.candidate;
 import com.nasdaq.presidentelectionapp.database.InMemoryDatabase;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Set;
 
 @Repository
-public class FindCandidateRepositoryImpl implements FindCandidateRepository {
+public class CandidateRepositoryImpl implements FindCandidateRepository {
    @Override
-   public List<FindCandidateDto> findAll() {
+   public Set<CandidateDto> findAll() {
       InMemoryDatabase inMemoryDatabase = InMemoryDatabase.getInstance();
       return inMemoryDatabase.getCandidates();
    }

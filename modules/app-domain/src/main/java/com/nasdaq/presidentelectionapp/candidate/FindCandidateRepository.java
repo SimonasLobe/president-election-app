@@ -1,9 +1,9 @@
 package com.nasdaq.presidentelectionapp.candidate;
 
-import java.util.List;
+import java.util.Set;
 
 public interface FindCandidateRepository {
 
-   List<FindCandidateDto> findAll();
+   Set<CandidateDto> findAll();
 
 }

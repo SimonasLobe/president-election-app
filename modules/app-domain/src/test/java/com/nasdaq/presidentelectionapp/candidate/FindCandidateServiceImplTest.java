@@ -6,7 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,9 +25,9 @@ class FindCandidateServiceImplTest {
 
    @Test
    void shouldReturnAllCandidates() {
-      when(findCandidateRepository.findAll()).thenReturn(List.of(FindCandidateDto.builder().number(1).name("Eric").lastName("Adams")
+      when(findCandidateRepository.findAll()).thenReturn(Set.of(CandidateDto.builder().number(1).name("Eric").lastName("Adams")
                   .agendaSummary("You The Voter Have Integrity, Honesty, And Experience When You Vote For me").build(),
-            FindCandidateDto.builder().number(2).name("Pete").lastName("Buttigieg")
+            CandidateDto.builder().number(2).name("Pete").lastName("Buttigieg")
                   .agendaSummary("For great results, not empty promises.").build()));
 
       var allCandidates = findCandidateService.findAll();
@@ -35,7 +35,7 @@ class FindCandidateServiceImplTest {
       verify(findCandidateRepository, times(1)).findAll();
 
       assertThat(allCandidates.size(), is(2));
-      var findCandidateDto = allCandidates.get(0);
+      var findCandidateDto = allCandidates.iterator().next();
 
       assertThat(findCandidateDto.getNumber(), is(1));
       assertThat(findCandidateDto.getName(), is("Eric"));

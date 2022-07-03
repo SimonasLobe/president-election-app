@@ -2,7 +2,7 @@ package com.nasdaq.presidentelectionapp.candidate;
 
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 public class FindCandidateServiceImpl implements FindCandidateService {
@@ -10,7 +10,8 @@ public class FindCandidateServiceImpl implements FindCandidateService {
    private final FindCandidateRepository findCandidateRepository;
 
    @Override
-   public List<FindCandidateDto> findAll() {
+   public Set<CandidateDto> findAll() {
       return findCandidateRepository.findAll();
    }
+
 }
