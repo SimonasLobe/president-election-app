@@ -1,5 +1,9 @@
 package com.nasdaq.presidentelectionapp.candidate;
 
+import com.nasdaq.presidentelectionapp.candidate.representation.CandidateApiRepresentation;
+import com.nasdaq.presidentelectionapp.candidate.representation.ResultApiPerRegionRepresentation;
+import com.nasdaq.presidentelectionapp.candidate.representation.ResultApiRepresentation;
+import com.nasdaq.presidentelectionapp.candidate.representation.WinnerApiRepresentation;
 import com.nasdaq.presidentelectionapp.exceptions.DomainValidationException;
 import com.nasdaq.presidentelectionapp.exceptions.EntityNotFoundException;
 import com.nasdaq.presidentelectionapp.voter.GetVoterService;
@@ -91,13 +95,23 @@ public class ElectionRestController {
       return ResponseEntity.ok(results);
    }
 
-   @Operation(summary = "Get results")
+   @Operation(summary = "Get results by region")
    @ApiResponses(value = {
          @ApiResponse(responseCode = "200", description = "Voting results per region collected successfully", content = {
                @Content(mediaType = "application/json", schema = @Schema(implementation = ResultApiPerRegionRepresentation.class))})})
    @GetMapping("/resultsPerRegion")
    public ResponseEntity<List<ResultApiPerRegionRepresentation>> getResultsPerRegion() {
       List<ResultApiPerRegionRepresentation> resultsPerRegion = getVoterFacade.getResultsPerRegion();
+      return ResponseEntity.ok(resultsPerRegion);
+   }
+
+   @Operation(summary = "Get winner")
+   @ApiResponses(value = {
+         @ApiResponse(responseCode = "200", description = "Winner resolved", content = {
+               @Content(mediaType = "application/json", schema = @Schema(implementation = WinnerApiRepresentation.class))})})
+   @GetMapping("/winner")
+   public ResponseEntity<WinnerApiRepresentation> getWinner() {
+      WinnerApiRepresentation resultsPerRegion = getVoterFacade.getWinner();
       return ResponseEntity.ok(resultsPerRegion);
    }
 

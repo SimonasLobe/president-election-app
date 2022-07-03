@@ -1,5 +1,8 @@
 package com.nasdaq.presidentelectionapp.candidate;
 
+import com.nasdaq.presidentelectionapp.candidate.representation.ResultApiPerRegionRepresentation;
+import com.nasdaq.presidentelectionapp.candidate.representation.ResultApiRepresentation;
+import com.nasdaq.presidentelectionapp.candidate.representation.WinnerApiRepresentation;
 import com.nasdaq.presidentelectionapp.voter.GetVoterService;
 import com.nasdaq.presidentelectionapp.voter.VoterDto;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -48,5 +52,32 @@ public class GetVoterApiFacade {
             .build()));
 
       return resultByRegion;
+   }
+
+   public WinnerApiRepresentation getWinner() {
+      List<ResultApiRepresentation> results = getResults();
+
+      Optional<ResultApiRepresentation> maxVotes = results.stream()
+            .max((o1, o2) -> {
+               if (o1.getTotalVotes().longValue() == o2.getTotalVotes().longValue()) {
+                  return 0;
+               } else {
+                  return o1.getTotalVotes().compareTo(o2.getTotalVotes());
+               }
+            });
+
+      List<ResultApiRepresentation> maxResults = new ArrayList<>();
+
+      if (maxVotes.isPresent()) {
+         maxResults = results.stream()
+               .filter(result -> maxVotes.get().getTotalVotes().equals(result.getTotalVotes()))
+               .toList();
+      }
+
+      return WinnerApiRepresentation.builder().candidateNumbers(maxResults.stream()
+            .map(ResultApiRepresentation::getCandidateNumber)
+            .toList()).build();
+
+
    }
 }

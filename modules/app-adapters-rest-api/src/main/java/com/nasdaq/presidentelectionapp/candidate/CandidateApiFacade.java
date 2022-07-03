@@ -1,5 +1,6 @@
 package com.nasdaq.presidentelectionapp.candidate;
 
+import com.nasdaq.presidentelectionapp.candidate.representation.CandidateApiRepresentation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
