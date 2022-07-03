@@ -22,6 +22,10 @@ public class SaveVoterServiceImpl implements SaveVoterService {
          throw new DomainValidationException("Voter id not provided!", "SaveVoterDto.id");
       }
 
+      if (voterDto.getRegion() == null || voterDto.getRegion().isEmpty()) {
+         throw new DomainValidationException("Voter region not provided!", "SaveVoterDto.region");
+      }
+
       if (voterDto.getVotedCandidateNumber() == null) {
          throw new DomainValidationException("Voter candidate choice not provided!", "SaveVoterDto.votedCandidateNumber");
       }

@@ -84,11 +84,21 @@ public class ElectionRestController {
    @Operation(summary = "Get results")
    @ApiResponses(value = {
          @ApiResponse(responseCode = "200", description = "Voting results collected successfully", content = {
-               @Content(mediaType = "application/json", schema = @Schema(implementation = CandidateApiRepresentation.class))})})
+               @Content(mediaType = "application/json", schema = @Schema(implementation = ResultApiRepresentation.class))})})
    @GetMapping("/results")
    public ResponseEntity<List<ResultApiRepresentation>> getResults() {
-      List<ResultApiRepresentation> allCandidates = getVoterFacade.getResults();
-      return ResponseEntity.ok(allCandidates);
+      List<ResultApiRepresentation> results = getVoterFacade.getResults();
+      return ResponseEntity.ok(results);
+   }
+
+   @Operation(summary = "Get results")
+   @ApiResponses(value = {
+         @ApiResponse(responseCode = "200", description = "Voting results per region collected successfully", content = {
+               @Content(mediaType = "application/json", schema = @Schema(implementation = ResultApiPerRegionRepresentation.class))})})
+   @GetMapping("/resultsPerRegion")
+   public ResponseEntity<List<ResultApiPerRegionRepresentation>> getResultsPerRegion() {
+      List<ResultApiPerRegionRepresentation> resultsPerRegion = getVoterFacade.getResultsPerRegion();
+      return ResponseEntity.ok(resultsPerRegion);
    }
 
 }
