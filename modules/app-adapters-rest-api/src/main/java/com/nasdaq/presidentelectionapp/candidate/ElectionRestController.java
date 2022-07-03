@@ -28,6 +28,7 @@ import java.util.Optional;
 public class ElectionRestController {
 
    private final CandidateApiFacade candidateApiFacade;
+   private final GetVoterApiFacade getVoterFacade;
    private final SaveVoterService saveVoterService;
    private final GetVoterService getVoterService;
 
@@ -78,6 +79,16 @@ public class ElectionRestController {
       }
 
       return ResponseEntity.ok(ResponseMessage.builder().message("Vote successful!").build());
+   }
+
+   @Operation(summary = "Get results")
+   @ApiResponses(value = {
+         @ApiResponse(responseCode = "200", description = "Voting results collected successfully", content = {
+               @Content(mediaType = "application/json", schema = @Schema(implementation = CandidateApiRepresentation.class))})})
+   @GetMapping("/results")
+   public ResponseEntity<List<ResultApiRepresentation>> getResults() {
+      List<ResultApiRepresentation> allCandidates = getVoterFacade.getResults();
+      return ResponseEntity.ok(allCandidates);
    }
 
 }

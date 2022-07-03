@@ -4,6 +4,7 @@ import com.nasdaq.presidentelectionapp.database.InMemoryDatabase;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public class VoterRepositoryImpl implements GetVoterRepository, SaveVoterRepository {
@@ -14,6 +15,12 @@ public class VoterRepositoryImpl implements GetVoterRepository, SaveVoterReposit
       return inMemoryDatabase.getVoters().stream()
             .filter(v -> id == v.getId())
             .findFirst();
+   }
+
+   @Override
+   public Set<VoterDto> getAll() {
+      InMemoryDatabase inMemoryDatabase = InMemoryDatabase.getInstance();
+      return inMemoryDatabase.getVoters();
    }
 
    @Override

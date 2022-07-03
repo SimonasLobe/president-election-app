@@ -4,6 +4,7 @@ import com.nasdaq.presidentelectionapp.exceptions.DomainValidationException;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
+import java.util.Set;
 
 @RequiredArgsConstructor
 public class GetVoterServiceImpl implements GetVoterService {
@@ -18,5 +19,10 @@ public class GetVoterServiceImpl implements GetVoterService {
       }
 
       return repository.getById(id);
+   }
+
+   @Override
+   public Set<VoterDto> getAll() {
+      return repository.getAll();
    }
 }
