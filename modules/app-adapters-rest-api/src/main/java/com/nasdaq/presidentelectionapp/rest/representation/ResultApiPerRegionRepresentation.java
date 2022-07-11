@@ -1,4 +1,4 @@
-package com.nasdaq.presidentelectionapp.candidate.representation;
+package com.nasdaq.presidentelectionapp.rest.representation;
 
 import lombok.Builder;
 import lombok.Data;

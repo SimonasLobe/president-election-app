@@ -1,6 +1,7 @@
-package com.nasdaq.presidentelectionapp.candidate;
+package com.nasdaq.presidentelectionapp.rest;
 
-import com.nasdaq.presidentelectionapp.candidate.representation.CandidateApiRepresentation;
+import com.nasdaq.presidentelectionapp.candidate.FindCandidateService;
+import com.nasdaq.presidentelectionapp.rest.representation.CandidateApiRepresentation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

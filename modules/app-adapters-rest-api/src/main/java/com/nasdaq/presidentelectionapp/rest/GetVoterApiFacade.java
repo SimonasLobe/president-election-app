@@ -1,8 +1,8 @@
-package com.nasdaq.presidentelectionapp.candidate;
+package com.nasdaq.presidentelectionapp.rest;
 
-import com.nasdaq.presidentelectionapp.candidate.representation.ResultApiPerRegionRepresentation;
-import com.nasdaq.presidentelectionapp.candidate.representation.ResultApiRepresentation;
-import com.nasdaq.presidentelectionapp.candidate.representation.WinnerApiRepresentation;
+import com.nasdaq.presidentelectionapp.rest.representation.ResultApiPerRegionRepresentation;
+import com.nasdaq.presidentelectionapp.rest.representation.ResultApiRepresentation;
+import com.nasdaq.presidentelectionapp.rest.representation.WinnerApiRepresentation;
 import com.nasdaq.presidentelectionapp.voter.GetVoterService;
 import com.nasdaq.presidentelectionapp.voter.VoterDto;
 import lombok.RequiredArgsConstructor;

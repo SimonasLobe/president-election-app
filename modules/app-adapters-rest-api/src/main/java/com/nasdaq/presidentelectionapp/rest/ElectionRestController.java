@@ -1,9 +1,9 @@
-package com.nasdaq.presidentelectionapp.candidate;
+package com.nasdaq.presidentelectionapp.rest;
 
-import com.nasdaq.presidentelectionapp.candidate.representation.CandidateApiRepresentation;
-import com.nasdaq.presidentelectionapp.candidate.representation.ResultApiPerRegionRepresentation;
-import com.nasdaq.presidentelectionapp.candidate.representation.ResultApiRepresentation;
-import com.nasdaq.presidentelectionapp.candidate.representation.WinnerApiRepresentation;
+import com.nasdaq.presidentelectionapp.rest.representation.CandidateApiRepresentation;
+import com.nasdaq.presidentelectionapp.rest.representation.ResultApiPerRegionRepresentation;
+import com.nasdaq.presidentelectionapp.rest.representation.ResultApiRepresentation;
+import com.nasdaq.presidentelectionapp.rest.representation.WinnerApiRepresentation;
 import com.nasdaq.presidentelectionapp.exceptions.DomainValidationException;
 import com.nasdaq.presidentelectionapp.exceptions.EntityNotFoundException;
 import com.nasdaq.presidentelectionapp.voter.GetVoterService;
@@ -46,7 +46,7 @@ public class ElectionRestController {
       return ResponseEntity.ok(allCandidates);
    }
 
-   @Operation(summary = "Save vote for a candidate")
+   @Operation(summary = "Save vote for a candidate. Returns a message if vote was successful or not")
    @ApiResponses(value = {
          @ApiResponse(responseCode = "200", description = "Voters vote successfully registered", content = {
                @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseMessage.class))}),
@@ -85,7 +85,7 @@ public class ElectionRestController {
       return ResponseEntity.ok(ResponseMessage.builder().message("Vote successful!").build());
    }
 
-   @Operation(summary = "Get results")
+   @Operation(summary = "Get Overall distribution of votes amongst candidates")
    @ApiResponses(value = {
          @ApiResponse(responseCode = "200", description = "Voting results collected successfully", content = {
                @Content(mediaType = "application/json", schema = @Schema(implementation = ResultApiRepresentation.class))})})
@@ -95,7 +95,7 @@ public class ElectionRestController {
       return ResponseEntity.ok(results);
    }
 
-   @Operation(summary = "Get results by region")
+   @Operation(summary = "Get voting result distribution amongst different regions")
    @ApiResponses(value = {
          @ApiResponse(responseCode = "200", description = "Voting results per region collected successfully", content = {
                @Content(mediaType = "application/json", schema = @Schema(implementation = ResultApiPerRegionRepresentation.class))})})
@@ -105,7 +105,8 @@ public class ElectionRestController {
       return ResponseEntity.ok(resultsPerRegion);
    }
 
-   @Operation(summary = "Get winner")
+   @Operation(summary = "Returns a single candidate if he/she was voted " +
+         "for by more than 50%. Otherwise two most voted candidates returned")
    @ApiResponses(value = {
          @ApiResponse(responseCode = "200", description = "Winner resolved", content = {
                @Content(mediaType = "application/json", schema = @Schema(implementation = WinnerApiRepresentation.class))})})
