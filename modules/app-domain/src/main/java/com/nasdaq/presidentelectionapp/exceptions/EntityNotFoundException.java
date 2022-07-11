@@ -1,7 +1,10 @@
 package com.nasdaq.presidentelectionapp.exceptions;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 
+@Getter
 public class EntityNotFoundException extends Exception {
    private final Class<?> entityClass;
    private final Serializable id;
